@@ -10,5 +10,11 @@
     ],
     "jsx": "react-jsx",
     "jsxImportSource": "hono/jsx",
+
+    /* Path */
+		"baseUrl": ".",
+		"paths": {
+			"@/*": ["./src/*"]
+		}
   }
 }
