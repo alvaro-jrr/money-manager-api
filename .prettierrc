@@ -1,15 +1,14 @@
 {
-  "plugins": [
-    "@trivago/prettier-plugin-sort-imports"
-  ],
-  "tabWidth": 2,
-  "useTabs": true,
-  "importOrder": [
-    "<THIRD_PARTY_MODULES>",
-    "^@/models/(.*)$",
-    "^@/lib/(.*)$",
-    "^@/features/(.*)$",
-    "^[./]"
-  ],
-  "importOrderSeparation": true
+	"plugins": ["@trivago/prettier-plugin-sort-imports"],
+	"tabWidth": 2,
+	"useTabs": true,
+	"importOrder": [
+		"<THIRD_PARTY_MODULES>",
+		"^@/database/(.*)$",
+		"^@/models/(.*)$",
+		"^@/shared/(.*)$",
+		"^@/features/(.*)$",
+		"^[./]"
+	],
+	"importOrderSeparation": true
 }
