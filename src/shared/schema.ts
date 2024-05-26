@@ -10,3 +10,13 @@ export const envSchema = z.object({
 	DB_PASSWORD: z.string().default(""),
 	JWT_SECRET: z.string().min(5),
 });
+
+/**
+ * The schema of the JWT payload.
+ */
+export const jwtPayloadSchema = z.object({
+	iat: z.number(),
+	nbf: z.number(),
+	exp: z.number(),
+	userId: z.number(),
+});

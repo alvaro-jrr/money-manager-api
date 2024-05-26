@@ -9,6 +9,8 @@ import {
 	date,
 	numeric,
 } from "drizzle-orm/pg-core";
+import { createInsertSchema } from "drizzle-zod";
+import { z } from "zod";
 
 /**
  * The users of the application.
@@ -16,13 +18,19 @@ import {
 export const users = pgTable("users", {
 	id: serial("id").primaryKey(),
 	email: varchar("email", { length: 50 }).notNull().unique(),
-	password: varchar("password", { length: 50 }).notNull(),
+	password: varchar("password", { length: 70 }).notNull(),
 	fullName: varchar("full_name", { length: 50 }).notNull(),
 });
 
 export const usersRelations = relations(users, ({ many }) => ({
 	transactions: many(transactions),
 }));
+
+export const insertUserSchema = createInsertSchema(users, {
+	email: (schema) => schema.email.email().min(1).max(50),
+	fullName: (schema) => schema.fullName.min(1).max(50),
+	password: (schema) => schema.password.min(5).max(70),
+});
 
 /**
  * The types of transactions.
@@ -44,6 +52,10 @@ export const categories = pgTable("categories", {
 export const categoriesRelations = relations(categories, ({ many }) => ({
 	transactions: many(transactions),
 }));
+
+export const insertCategorySchema = createInsertSchema(categories, {
+	title: (schema) => schema.title.min(1).max(50),
+});
 
 /**
  * The transactions an user has made.
@@ -78,3 +90,16 @@ export const transactionsRelations = relations(transactions, ({ one }) => ({
 		references: [categories.id],
 	}),
 }));
+
+export const insertTransactionSchema = createInsertSchema(transactions, {
+	amount: (schema) =>
+		z.preprocess((input) => {
+			const processed = schema.amount
+				.regex(/^\d+$/)
+				.transform(Number)
+				.safeParse(input);
+
+			return processed.success ? processed.data : input;
+		}, z.number().gt(0)),
+	description: (schema) => schema.description.min(1).max(50),
+});

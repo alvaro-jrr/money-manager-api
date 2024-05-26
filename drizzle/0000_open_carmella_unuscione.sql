@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS "transactions" (
 CREATE TABLE IF NOT EXISTS "users" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"email" varchar(50) NOT NULL,
-	"password" varchar(50) NOT NULL,
+	"password" varchar(70) NOT NULL,
 	"full_name" varchar(50) NOT NULL,
 	CONSTRAINT "users_email_unique" UNIQUE("email")
 );

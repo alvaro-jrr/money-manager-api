@@ -11,12 +11,21 @@ importers:
       '@hono/node-server':
         specifier: ^1.11.1
         version: 1.11.1
+      bcryptjs:
+        specifier: ^2.4.3
+        version: 2.4.3
+      dayjs:
+        specifier: ^1.11.11
+        version: 1.11.11
       dotenv:
         specifier: ^16.4.5
         version: 16.4.5
       drizzle-orm:
         specifier: ^0.30.10
         version: 0.30.10(@types/pg@8.11.6)(pg@8.11.5)
+      drizzle-zod:
+        specifier: ^0.5.1
+        version: 0.5.1(drizzle-orm@0.30.10(@types/pg@8.11.6)(pg@8.11.5))(zod@3.23.8)
       hono:
         specifier: ^4.3.9
         version: 4.3.9
@@ -33,6 +42,9 @@ importers:
       '@trivago/prettier-plugin-sort-imports':
         specifier: ^4.3.0
         version: 4.3.0(prettier@3.2.5)
+      '@types/bcryptjs':
+        specifier: ^2.4.6
+        version: 2.4.6
       '@types/node':
         specifier: ^20.11.17
         version: 20.12.12
@@ -614,6 +626,9 @@ packages:
       '@vue/compiler-sfc':
         optional: true
 
+  '@types/bcryptjs@2.4.6':
+    resolution: {integrity: sha512-9xlo6R2qDs5uixm0bcIqCeMCE6HiQsIyel9KQySStiyqNl2tnj2mP3DX1Nf56MD6KMenNNlBBsy3LJ7gUEQPXQ==}
+
   '@types/node@20.12.12':
     resolution: {integrity: sha512-eWLDGF/FOSPtAvEqeRAQ4C8LSA7M1I7i0ky1I8U7kD1J5ITyW3AsRhQrKVoWf5pFKZ2kILsEGJhsI9r93PYnOw==}
 
@@ -713,6 +728,9 @@ packages:
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
 
+  bcryptjs@2.4.3:
+    resolution: {integrity: sha512-V/Hy/X9Vt7f3BbPJEi8BdVFMByHi+jNXrYkW3huaybV/kQ0KJg0Y6PkEMbn+zeT+i+SiKZ/HMqJGIIt4LZDqNQ==}
+
   brace-expansion@1.1.11:
     resolution: {integrity: sha512-iCuPHDFgrHX7H2vEI/5xpz07zSHB00TpugqhmYtVmMO6518mCuRMoOYFldEBl0g187ufozdaHgWKcYFb61qGiA==}
 
@@ -769,6 +787,9 @@ packages:
   d@1.0.2:
     resolution: {integrity: sha512-MOqHvMWF9/9MX6nza0KgvFH4HpMU0EF5uUDXqX/BtxtU8NfB0QzRtJ8Oe/6SuS4kbhyzVJwjd97EA4PKrzJ8bw==}
     engines: {node: '>=0.12'}
+
+  dayjs@1.11.11:
+    resolution: {integrity: sha512-okzr3f11N6WuqYtZSvm+F776mB41wRZMhKP+hc34YdW+KmtYYK9iqvHSwo2k9FEH3fhGXvOPV6yz2IcSrfRUDg==}
 
   debug@4.3.4:
     resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}
@@ -880,6 +901,12 @@ packages:
         optional: true
       sqlite3:
         optional: true
+
+  drizzle-zod@0.5.1:
+    resolution: {integrity: sha512-C/8bvzUH/zSnVfwdSibOgFjLhtDtbKYmkbPbUCq46QZyZCH6kODIMSOgZ8R7rVjoI+tCj3k06MRJMDqsIeoS4A==}
+    peerDependencies:
+      drizzle-orm: '>=0.23.13'
+      zod: '*'
 
   env-paths@3.0.0:
     resolution: {integrity: sha512-dtJUTepzMW3Lm/NPxRf3wP4642UWhjL2sQxc+ym2YMj1m/H2zDNQOlezafzkHwn6sMstjHTwG6iQQsctDW/b1A==}
@@ -1853,6 +1880,8 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@types/bcryptjs@2.4.6': {}
+
   '@types/node@20.12.12':
     dependencies:
       undici-types: 5.26.5
@@ -1973,6 +2002,8 @@ snapshots:
 
   balanced-match@1.0.2: {}
 
+  bcryptjs@2.4.3: {}
+
   brace-expansion@1.1.11:
     dependencies:
       balanced-match: 1.0.2
@@ -2036,6 +2067,8 @@ snapshots:
       es5-ext: 0.10.64
       type: 2.7.2
 
+  dayjs@1.11.11: {}
+
   debug@4.3.4:
     dependencies:
       ms: 2.1.2
@@ -2074,6 +2107,11 @@ snapshots:
     optionalDependencies:
       '@types/pg': 8.11.6
       pg: 8.11.5
+
+  drizzle-zod@0.5.1(drizzle-orm@0.30.10(@types/pg@8.11.6)(pg@8.11.5))(zod@3.23.8):
+    dependencies:
+      drizzle-orm: 0.30.10(@types/pg@8.11.6)(pg@8.11.5)
+      zod: 3.23.8
 
   env-paths@3.0.0: {}
 
