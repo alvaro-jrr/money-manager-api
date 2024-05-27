@@ -11,6 +11,9 @@ export const client = new pg.Client({
 	user: env.DB_USERNAME,
 	password: env.DB_PASSWORD,
 	database: env.DB_DATABASE,
+	ssl: {
+		rejectUnauthorized: false,
+	},
 });
 
 await client.connect();
