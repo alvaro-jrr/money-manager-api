@@ -1,12 +1,14 @@
 import bcrypt from "bcryptjs";
+import dayjs from "dayjs";
 import { Hono } from "hono";
+import { jwt } from "hono/jwt";
 import { validator } from "hono/validator";
 
 import { db } from "@/database/db";
 import { insertUserSchema, users } from "@/database/schema";
 
 import { JwtUtils } from "@/shared/jwt";
-import { response } from "@/shared/utils";
+import { env, response } from "@/shared/utils";
 
 export const authRouter = new Hono();
 
@@ -123,9 +125,37 @@ authRouter.post(
 		return response(c, {
 			status: 200,
 			data: {
-				...userWithoutPassword,
+				user: userWithoutPassword,
 				token,
 			},
 		});
 	},
 );
+
+/**
+ * Checks the user status.
+ */
+authRouter.get("/check-status", jwt({ secret: env.JWT_SECRET }), async (c) => {
+	const payload = await JwtUtils.get(c);
+
+	if (!payload) {
+		return response(c, {
+			status: 401,
+			message: "User is not logged in",
+		});
+	}
+
+	const isExpired = dayjs().unix() > payload.exp;
+
+	if (isExpired) {
+		return response(c, {
+			status: 401,
+			message: "Invalid token",
+		});
+	}
+
+	return response(c, {
+		status: 200,
+		data: null,
+	});
+});
